@@ -203,6 +203,7 @@
 % For elements of entry
 \newcommand*{\entrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\entrypositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\entryadditionalpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{lighttext} #1}}
 \newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1.2em}\bodyfontlight\upshape\color{text} #1}}
@@ -385,9 +386,9 @@
 %                Commands for utilities
 %-------------------------------------------------------------------------------
 % Use to align an element of tabular table
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
 
 % Use to draw horizontal line with specific thickness
 \def\vhrulefill#1{\leavevmode\leaders\hrule\@height#1\hfill \kern\z@}
@@ -563,16 +564,16 @@
 }
 % Define an entry of cv information
 % Usage: \cventry{<url>}{<position>}{<title>}{<location>}{<date>}{<description>}
-\newcommand*{\cventry}[6]{%
+\newcommand*{\cventry}[7]{%
   \vspace{5mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
       \ifempty{#1}
-	{\entrytitlestyle{#3} & \entrylocationstyle{#4} \\}
-	{\entrytitlestyle{\href{#1}{#3}} & \entrylocationstyle{#4} \\}
-      \entrypositionstyle{#2} & \entrydatestyle{#5} \\
-    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#6}}
+	{\entrytitlestyle{#4} & \entrylocationstyle{#5} \\}
+	{\entrytitlestyle{\href{#1}{#4}} & \entrylocationstyle{#5} \\}
+      \entrypositionstyle{#2} \ifempty{#3}{}{ | \entryadditionalpositionstyle{#3}} & \entrydatestyle{#6} \\
+    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#7}}
   \end{tabular*}%
 }
 
